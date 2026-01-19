@@ -25,18 +25,11 @@ The design mirrors real-world lakehouse patterns used in modern data platforms.
 - Prevents full table reprocessing and improves scalability.
 ## 4)Dimensional Modeling (Gold Layer)
 - The Gold layer contains analytics-ready datasets modeled using a star schema to support efficient querying and BI consumption.
-Fact table
-- Bronze layer maintains a raw 1:1 copy of the source.
-- Silver layer applies cleansing, transformations, and merge-based upserts.
-- Gold layer models the data into fact and dimension tables using a star schema.
-- SCD logic tracks historical changes in dimensional attributes.
-  
-
--Store descriptive attributes used for slicing and filtering analytical queries. Dimensions are designed to be reusable across multiple facts.
+- Store descriptive attributes used for slicing and filtering analytical queries. Dimensions are designed to be reusable across multiple facts.
 Surrogate keys
--Generated for all dimension tables to ensure stable joins, decouple analytics from source system keys, and support Slowly Changing Dimensions.
+- Generated for all dimension tables to ensure stable joins, decouple analytics from source system keys, and support Slowly Changing Dimensions.
 Star schema design
--Optimized for analytical workloads and BI tools by minimizing joins and enabling fast aggregations.
+- Optimized for analytical workloads and BI tools by minimizing joins and enabling fast aggregations.
 This layer is intentionally free of heavy transformation logic and is curated specifically for reporting, dashboards, and downstream analytical use cases.
 ## 5)Slowly Changing Dimensions (SCD)
 This project implements Slowly Changing Dimension (SCD) logic to track historical changes in dimensional attributes over time without losing data integrity.
