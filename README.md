@@ -12,38 +12,8 @@ This project follows the Databricks-style Lakehouse Medallion Architecture:
 
 The design mirrors real-world lakehouse patterns used in modern data platforms.
 ## 2)Data Flow (Bronze → Silver → Gold)
-┌────────────┐
-│   Source   │
-│  (Raw Data)│
-└─────┬──────┘
-      │  Incremental Load
-      ▼
-┌────────────┐
-│  Bronze    │
-│ Raw Replica│
-│ Immutable  │
-└─────┬──────┘
-      │  Merge / Upsert
-      ▼
-┌────────────┐
-│  Silver    │
-│ Cleaned &  │
-│ Transformed│
-└─────┬──────┘
-      │  Business Logic
-      ▼
-┌────────────┐
-│   Gold     │
-│ Fact & Dim │
-│ Star Schema│
-└─────┬──────┘
-      │
-      ▼
-┌────────────┐
-│    SCDs    │
-│ History    │
-│ Tracking   │
-└────────────┘
+![Dashboard Preview](https://github.com/manojnadakuduru/lakehouse-medallion-architecture/blob/main/Dataflow.png)
+
 -Source data is ingested incrementally based on last processed timestamps
 -Bronze layer maintains a raw 1:1 copy of the source
 -Silver layer applies cleansing, transformations, and merge-based upserts
@@ -68,19 +38,30 @@ This layer is intentionally free of heavy transformation logic and is curated sp
 ## 5)Slowly Changing Dimensions (SCD)
 This project implements Slowly Changing Dimension (SCD) logic to track historical changes in dimensional attributes over time without losing data integrity.
 **Change detection**
+
 Identifies updates in dimension attributes by comparing incoming records with existing dimension data.
 **Historical versioning**
+
 Instead of overwriting records, new versions of dimension rows are created to preserve historical states.
 **Validity tracking**
+
 Each dimension record includes effective start and end timestamps (or flags) to enable accurate point-in-time analysis.
 **Surrogate key management**
+
 New surrogate keys are assigned for changed dimension records to maintain consistent joins with fact tables.
+
 This approach ensures that analytical queries reflect the correct historical context and supports trend analysis across changing business attributes.
 ## 6)Technologies Used
-**PySpark** – Core data processing engine used for transformations, incremental ingestion, merge-based upserts, and dimensional modeling.
-**Spark SQL** – Used for declarative transformations, joins, window functions, and analytical logic.
-**Lakehouse Medallion Architecture** – Bronze–Silver–Gold layered design aligned with Databricks lakehouse best practices.
-**Dimensional Modeling** – Star schema design with fact and dimension tables optimized for analytics.
-**Slowly Changing Dimensions (SCD Type 2)** – Implemented to preserve historical changes in dimensional attributes.
-**Databricks-style Notebooks** – Notebook-based development pattern following Databricks execution semantics.
+**PySpark** 
+– Core data processing engine used for transformations, incremental ingestion, merge-based upserts, and dimensional modeling.
+**Spark SQL**
+– Used for declarative transformations, joins, window functions, and analytical logic.
+**Lakehouse Medallion Architecture** 
+– Bronze–Silver–Gold layered design aligned with Databricks lakehouse best practices.
+**Dimensional Modeling** 
+– Star schema design with fact and dimension tables optimized for analytics.
+**Slowly Changing Dimensions (SCD Type 2)**
+– Implemented to preserve historical changes in dimensional attributes.
+**Databricks-style Notebooks** 
+– Notebook-based development pattern following Databricks execution semantics.
 
