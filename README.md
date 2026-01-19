@@ -15,7 +15,9 @@ The design mirrors real-world lakehouse patterns used in modern data platforms.
 ![Dashboard Preview](https://github.com/manojnadakuduru/lakehouse-medallion-architecture/blob/main/Dataflow.png)
 
 -Source data is ingested incrementally based on last processed timestamps.
+
 -Bronze layer maintains a raw 1:1 copy of the source.
+
 -Silver layer applies cleansing, transformations, and merge-based upserts.
 -Gold layer models the data into fact and dimension tables using a star schema.
 -SCD logic tracks historical changes in dimensional attributes.
