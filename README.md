@@ -13,24 +13,25 @@ This project follows the Databricks-style Lakehouse Medallion Architecture:
 The design mirrors real-world lakehouse patterns used in modern data platforms.
 ## 2)Data Flow (Bronze → Silver → Gold)
 ![Dashboard Preview](https://github.com/manojnadakuduru/lakehouse-medallion-architecture/blob/main/Dataflow.png)
-
--Source data is ingested incrementally based on last processed timestamps.
-
--Bronze layer maintains a raw 1:1 copy of the source.
-
--Silver layer applies cleansing, transformations, and merge-based upserts.
--Gold layer models the data into fact and dimension tables using a star schema.
--SCD logic tracks historical changes in dimensional attributes.
+- Source data is ingested incrementally based on last processed timestamps.
+- Bronze layer maintains a raw 1:1 copy of the source.
+- Silver layer applies cleansing, transformations, and merge-based upserts.
+- Gold layer models the data into fact and dimension tables using a star schema.
+- SCD logic tracks historical changes in dimensional attributes.
 ## 3)Incremental Load Strategy
 - Tracks the last successfully processed timestamp.
 - Extracts only new or updated records from the source.
 - Uses merge-based upserts to handle updates and late-arriving data.
 - Prevents full table reprocessing and improves scalability.
 ## 4)Dimensional Modeling (Gold Layer)
--The Gold layer contains analytics-ready datasets modeled using a star schema to support efficient querying and BI consumption.
+- The Gold layer contains analytics-ready datasets modeled using a star schema to support efficient querying and BI consumption.
 Fact table
--Captures measurable business events at the defined grain, storing foreign keys to related dimensions and numerical metrics used for aggregation.
-Dimension tables
+- Bronze layer maintains a raw 1:1 copy of the source.
+- Silver layer applies cleansing, transformations, and merge-based upserts.
+- Gold layer models the data into fact and dimension tables using a star schema.
+- SCD logic tracks historical changes in dimensional attributes.
+  
+
 -Store descriptive attributes used for slicing and filtering analytical queries. Dimensions are designed to be reusable across multiple facts.
 Surrogate keys
 -Generated for all dimension tables to ensure stable joins, decouple analytics from source system keys, and support Slowly Changing Dimensions.
