@@ -33,9 +33,7 @@ Star schema design
 This layer is intentionally free of heavy transformation logic and is curated specifically for reporting, dashboards, and downstream analytical use cases.
 ## 5)Slowly Changing Dimensions (SCD)
 This project implements Slowly Changing Dimension (SCD) logic to track historical changes in dimensional attributes over time without losing data integrity.
-
 **Change detection**
-
 Identifies updates in dimension attributes by comparing incoming records with existing dimension data.
 
 **Historical versioning**
