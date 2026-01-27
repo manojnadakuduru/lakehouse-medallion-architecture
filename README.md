@@ -34,7 +34,7 @@ This layer is intentionally free of heavy transformation logic and is curated sp
 ## 5)Slowly Changing Dimensions (SCD)
 This project implements Slowly Changing Dimension (SCD) logic to track historical changes in dimensional attributes over time without losing data integrity.
 
-**Change detection** - Identifies updates in dimension attributes by comparing incoming records with existing dimension data.
+**Change detection** - Compares incoming records with current dimension data to identify updates.
 
 **Historical versioning** - Instead of overwriting records, new versions of dimension rows are created to preserve historical states.
 
@@ -42,7 +42,6 @@ This project implements Slowly Changing Dimension (SCD) logic to track historica
 
 **Surrogate key management** - New surrogate keys are assigned for changed dimension records to maintain consistent joins with fact tables.
 
-This approach ensures that analytical queries reflect the correct historical context and supports trend analysis across changing business attributes.
 ## 6)Technologies Used
 **PySpark** 
 – Core data processing engine used for transformations, incremental ingestion, merge-based upserts, and dimensional modeling.
